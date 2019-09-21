@@ -9,23 +9,23 @@ public class Ejercicio5 {
 
 
 		String ruta="src/2DAM";
-		String lista;
 		File f=new File(ruta);
 		
-		File[] fichero = f.listFiles();
-		for (int i=0;i<fichero.length;i++){
-			
-			System.out.println(fichero[i].getName());
-			if(f.isDirectory()) {
-				File[] fichero1 = f.listFiles();
-					for (int j=0;j<fichero1.length;j++){
-						System.out.println(fichero1[i].getName());
-					}
-			}
-			
-					
-		}
+		String[]nombres_archivos=f.list();
 		
+		for(int i=0;i<nombres_archivos.length;i++) {
+			System.out.println(nombres_archivos[i]);
+			File f1=new File(f.getAbsolutePath(),nombres_archivos[i]);
+			
+			if(f1.isDirectory()) {
+				String []archivos_carpeta=f1.list();
+				
+				for(int j=0;j<archivos_carpeta.length;j++) {
+					
+					System.out.println(archivos_carpeta[j]);
+				}
+			}
+		}
 		
 	}
 

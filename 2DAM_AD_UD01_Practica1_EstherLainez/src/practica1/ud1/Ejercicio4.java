@@ -13,8 +13,8 @@ public class Ejercicio4 {
 		
 		if(f.exists()) {
 			
-			String[] fichero = f.list();
-			System.out.println("\n");
+			File[] fichero = f.listFiles();
+			
 			for(int i=0;i<fichero.length;i++) {
 				System.out.println(fichero[i]);
 			}
