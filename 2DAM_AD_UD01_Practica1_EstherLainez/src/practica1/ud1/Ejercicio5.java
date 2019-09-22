@@ -15,7 +15,7 @@ public class Ejercicio5 {
 		
 		for(int i=0;i<nombres_archivos.length;i++) {
 			System.out.println(nombres_archivos[i]);
-			File f1=new File(f.getAbsolutePath(),nombres_archivos[i]);
+			File f1=new File(f.getPath(),nombres_archivos[i]);
 			
 			if(f1.isDirectory()) {
 				String []archivos_carpeta=f1.list();

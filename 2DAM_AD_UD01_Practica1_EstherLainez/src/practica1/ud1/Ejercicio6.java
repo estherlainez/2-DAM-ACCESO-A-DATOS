@@ -42,9 +42,27 @@ public class Ejercicio6 extends JFrame {
 		setContentPane(contentPane);
 		
 		File f= new File("src/2DAM");
-		File []nombres =f.listFiles();
+		ArrayList<String>misElementos= new ArrayList<String>();
 		
-		JList listado = new JList(nombres);
+		File[] listaArchivos = f.listFiles();
+		for (int i = 0; i < listaArchivos.length; i++) {
+			if (listaArchivos[i].isFile()) {
+				misElementos.add(listaArchivos[i].getName());
+		
+			}
+			
+			if(listaArchivos[i].isDirectory()) {
+				File[] listaNombres = f.listFiles();
+				
+				for(int j=0;j<listaNombres.length;j++) {
+					misElementos.add(listaNombres[i].getName());
+					
+				}
+			}
+		}
+		
+		JList listado = new JList(listaArchivos);
+		listado.setListData(misElementos.toArray());
 		/*
 		ArrayList<String>misElementos= new ArrayList<String>();
 		misElementos.add("a");
@@ -52,7 +70,6 @@ public class Ejercicio6 extends JFrame {
 		misElementos.add("a");
 		listado.setListData(misElementos.toArray());
 		
-		String[]nombres_archivos=f.list();
 		*/
 		
 		contentPane.add(listado, BorderLayout.CENTER);
