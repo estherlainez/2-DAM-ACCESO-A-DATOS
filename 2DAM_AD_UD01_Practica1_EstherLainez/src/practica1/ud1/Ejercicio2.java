@@ -79,7 +79,7 @@ public class Ejercicio2 {
 				 e.printStackTrace();
 			 }
 			 
-			 f=new File("SRC\\2DAM\\misNotas.txt");
+			 f=new File("SRC\\2DAM\\misNotas.txt ");
 			 try {
 				 f.createNewFile();
 			 }catch(IOException e){

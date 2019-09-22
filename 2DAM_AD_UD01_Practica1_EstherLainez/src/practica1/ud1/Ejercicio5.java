@@ -22,7 +22,7 @@ public class Ejercicio5 {
 				
 				for(int j=0;j<archivos_carpeta.length;j++) {
 					
-					System.out.println(archivos_carpeta[j]);
+					System.out.println(" "+archivos_carpeta[j]);
 				}
 			}
 		}

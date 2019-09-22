@@ -21,9 +21,7 @@ public class Ejercicio5_Prueba {
 					
 					System.out.println(archivos_carpeta[j].getName());
 				}
-			}
-		    
-		    if(archivos[i].isFile()) {
+			}else if(archivos[i].isFile()) {
 		    	
 		    	System.out.println(archivos[i].getName());
 		    	

@@ -12,7 +12,8 @@ public class Ejercicio3 {
 		 
 		 
 		 if(f1.renameTo(f2)) {
-		     System.out.println("El archivo se ha cambiado de nombre");
+		     System.out.println("El archivo ha cambiado de nombre");
+		     
 		 }else {
 			 System.out.println("Error");
 		 }

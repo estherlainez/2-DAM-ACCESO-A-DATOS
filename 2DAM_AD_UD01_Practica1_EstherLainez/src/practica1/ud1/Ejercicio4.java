@@ -9,6 +9,7 @@ public class Ejercicio4 {
 		// TODO Auto-generated method stub
 
 		String ruta="src/2DAM";
+		
 		File f=new File(ruta);
 		
 		if(f.exists()) {

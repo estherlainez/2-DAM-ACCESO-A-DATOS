@@ -24,7 +24,7 @@ public class Ejercicio1 {
 			  f.canWrite()+""+f.canExecute());
 			  System.out.println("Longitud"+f.length()+"bytes");
 		  }else
-			  System.out.println("No existe");
+			  System.out.println(" No existe ");
 	   
 	}
 

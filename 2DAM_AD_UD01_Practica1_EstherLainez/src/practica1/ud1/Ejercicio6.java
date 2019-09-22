@@ -42,35 +42,29 @@ public class Ejercicio6 extends JFrame {
 		setContentPane(contentPane);
 		
 		File f= new File("src/2DAM");
+		
 		ArrayList<String>misElementos= new ArrayList<String>();
 		
-		File[] listaArchivos = f.listFiles();
-		for (int i = 0; i < listaArchivos.length; i++) {
-			if (listaArchivos[i].isFile()) {
-				misElementos.add(listaArchivos[i].getName());
+		String[]nombres_archivos=f.list();
 		
-			}
+		for(int i=0;i<nombres_archivos.length;i++) {
 			
-			if(listaArchivos[i].isDirectory()) {
-				File[] listaNombres = f.listFiles();
+			misElementos.add(nombres_archivos[i]);
+			
+			File f1=new File(f.getPath(),nombres_archivos[i]);
+			
+			if(f1.isDirectory()) {
+				String []archivos_carpeta=f1.list();
 				
-				for(int j=0;j<listaNombres.length;j++) {
-					misElementos.add(listaNombres[i].getName());
+				for(int j=0;j<archivos_carpeta.length;j++) {
+					
+					misElementos.add(archivos_carpeta[j]);
 					
 				}
 			}
 		}
-		
-		JList listado = new JList(listaArchivos);
+		JList listado = new JList(nombres_archivos);
 		listado.setListData(misElementos.toArray());
-		/*
-		ArrayList<String>misElementos= new ArrayList<String>();
-		misElementos.add("a");
-		misElementos.add("a");
-		misElementos.add("a");
-		listado.setListData(misElementos.toArray());
-		
-		*/
 		
 		contentPane.add(listado, BorderLayout.CENTER);
 	}

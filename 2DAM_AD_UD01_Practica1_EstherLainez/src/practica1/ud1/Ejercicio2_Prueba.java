@@ -51,12 +51,12 @@ public class Ejercicio2_Prueba {
 			}
 				
 			 	 
-			File f0=new File(nuevo2.getPath()+"/"+nombreFichero);
-			File f9=new File(nuevo2.getPath()+"/"+nombreFichero2);
+			File f4=new File(nuevo2.getPath()+"/"+nombreFichero);
+			File f5=new File(nuevo2.getPath()+"/"+nombreFichero2);
 				 
 			try {
-				f0.createNewFile();
-				f9.createNewFile();
+				f4.createNewFile();
+				f5.createNewFile();
 						
 				}catch(IOException e){
 					System.out.println(e.getMessage());
