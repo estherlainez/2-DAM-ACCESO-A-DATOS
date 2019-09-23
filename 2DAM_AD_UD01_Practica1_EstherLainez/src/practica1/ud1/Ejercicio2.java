@@ -6,8 +6,7 @@ import java.io.IOException;
 public class Ejercicio2 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
+
 		 String ruta="src/";
 		 String nombre="2DAM";
 		 File f = new File (ruta+nombre);
@@ -20,78 +19,59 @@ public class Ejercicio2 {
 		 String nombreFichero3="P1.txt";
 		 String nombreFichero4="misNotas.txt";
 		 
-		
 		 
 		 if(f.exists()==false) {
-			 f.mkdir();
-			 /*
-			  * Para crear una carpeta hija, debemos partir de la ruta de la carpeta
-			  * padre y concatenarle el nombre de la nueva carpeta
-			  */
-			 String carpetaHija="AD";
-			 String carpetaHija2="PSP";
-			 //Ruta src/carpetaNueva
+			f.mkdir();
+			/*
+			* Para crear una carpeta hija, debemos partir de la ruta de la carpeta
+			* padre y concatenarle el nombre de la nueva carpeta
+			*/
+			String carpetaHija="AD";
+			String carpetaHija2="PSP";
+			//Ruta src/carpetaNueva
 			 
-			 nuevo=new File( f.getPath()+"/"+carpetaHija);
-			 nuevo2=new File( f.getPath()+"/"+carpetaHija2);
+			nuevo=new File( f.getPath()+"/"+carpetaHija);
+			nuevo2=new File( f.getPath()+"/"+carpetaHija2);
 			 
-			 //Ruta src/carpetaNueva/carpetaHija
-			 nuevo.mkdir();
-			 nuevo2.mkdir();
-			 
-			 f=new File(nuevo.getPath()+"/"+nombreFichero3);
-			 
-			 try {
-				 f.createNewFile();
-			 }catch(IOException e){
-				 e.printStackTrace();
-			 }
-			 
-			 f=new File(nuevo.getPath()+"/"+nombreFichero);
-			 
-			 try {
-				 f.createNewFile();
-			 }catch(IOException e){
-				 e.printStackTrace();
-			 }
-			 
-			 f=new File(nuevo.getPath()+"/"+nombreFichero2);
-			 
-			 try {
-				 f.createNewFile();
-			 }catch(IOException e){
-				 e.printStackTrace();
-			 }
-			
-			 
-			 f=new File(nuevo2.getPath()+"/"+nombreFichero);
-			 
-			 try {
-				 f.createNewFile();
-			 }catch(IOException e){
-				 e.printStackTrace();
-			 }
-			 
-			 f=new File(f.getParent()+"/"+nombreFichero2);
-			 try {
-				 f.createNewFile();
-			 }catch(IOException e){
-				 e.printStackTrace();
-			 }
-			 
-			 f=new File("SRC\\2DAM\\misNotas.txt ");
-			 try {
-				 f.createNewFile();
-			 }catch(IOException e){
-				 e.printStackTrace();
-			 }
-			 
+			//Ruta src/carpetaNueva/carpetaHija
+			nuevo.mkdir();
+			nuevo2.mkdir();
+			 	 
+			File f1=new File(nuevo.getPath()+"/"+nombreFichero3);
+			File f2=new File(nuevo.getPath()+"/"+nombreFichero);
+			File f3=new File(nuevo.getPath()+"/"+nombreFichero2);
+				 
+			try {
+				f1.createNewFile();
+				f2.createNewFile();
+				f3.createNewFile();
+						
+			}catch(IOException e){
+				System.out.println(e.getMessage());
+			}
+				
+			 	 
+			File f4=new File(nuevo2.getPath()+"/"+nombreFichero);
+			File f5=new File(nuevo2.getPath()+"/"+nombreFichero2);
+				 
+			try {
+				f4.createNewFile();
+				f5.createNewFile();
+						
+				}catch(IOException e){
+					System.out.println(e.getMessage());
+				}
+				
+			f=new File("SRC\\2DAM\\misNotas.txt");
+			try {
+				f.createNewFile();
+			}catch(IOException e){
+				e.printStackTrace();
+			}
 			 
 			
 		 }
 		 
-		 
-
 	}
 
 }
