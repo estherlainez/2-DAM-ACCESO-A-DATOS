@@ -63,10 +63,26 @@ public class Ejercicio6 extends JFrame {
 				}
 			}
 		}
-		JList listado = new JList(nombres_archivos);
+		JList listado = new JList();
 		listado.setListData(misElementos.toArray());
 		
 		contentPane.add(listado, BorderLayout.CENTER);
 	}
-
+/*
+	public static void  mostrarContenido(File f) {
+		//System.out.println(f.getName());
+		
+		
+		if(f.isDirectory()) {
+			
+			File[] fichero = f.listFiles();
+			
+			for(int i=0;i<fichero.length;i++) {
+				System.out.println(fichero[i]);
+				mostrarContenido(fichero[i]);
+			
+			}
+		
+	}
+  }*/
 }

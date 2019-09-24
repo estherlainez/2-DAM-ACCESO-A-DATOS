@@ -11,7 +11,18 @@ public class Ejercicio4 {
 		String ruta="src/2DAM";
 		
 		File f=new File(ruta);
+		//.list(-->NOMBRES DE LOS ARCHIVOS
 		
+		//.listFiles()-->Objetos File
+		
+		String nombres[]=f.list();
+		
+		for(int i=0;i<nombres.length;i++) {
+			System.out.println(nombres[i]);
+		}
+		
+		
+       //otra manera
 		if(f.exists()) {
 			
 			File[] fichero = f.listFiles();
@@ -20,7 +31,10 @@ public class Ejercicio4 {
 				System.out.println(fichero[i]);
 			}
 			
-		}
+		}	
+	
+		
+		
 		
 	}
 
