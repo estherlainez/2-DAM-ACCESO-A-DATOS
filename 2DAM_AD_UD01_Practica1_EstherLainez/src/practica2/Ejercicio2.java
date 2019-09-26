@@ -29,7 +29,7 @@ public class Ejercicio2 {
 				n=teclado.nextInt();
 				cifra=String.valueOf(n);
 				suma=suma+n;
-				fw.write(cifra);
+				bw.write(cifra);
 				bw.newLine();
 				contador++;
 			}while(n!=0);

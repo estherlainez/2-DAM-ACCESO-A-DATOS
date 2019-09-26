@@ -1,5 +1,6 @@
 package practica2;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -64,7 +65,8 @@ public class Ejercicio1 {
 		} catch (ClassNotFoundException e) {
 		
 			e.printStackTrace();
-		}finally {
+		}
+		finally {
 			try {
 				objectin.close();
 			} catch (IOException e) {
