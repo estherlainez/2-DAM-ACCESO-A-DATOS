@@ -48,24 +48,30 @@ public class Ejercicio1 {
 
 		int i=0;
 		
+		FileInputStream filein=null;
+		ObjectInputStream objectin=null;
 		try {
-			FileInputStream filein=new FileInputStream(f);
-			ObjectInputStream objectin= new ObjectInputStream(filein);
+			filein=new FileInputStream(f);
+			objectin= new ObjectInputStream(filein);
 			
 			while(true) {
 				dp=(DatosPersona) objectin.readObject();
 				
-				System.out.println(dp);
 			}
 			
-			//objectin.close();	
-	
 		}catch(IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 		
 			e.printStackTrace();
+		}finally {
+			try {
+				objectin.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
 		}
+		
 		
 		
 	}

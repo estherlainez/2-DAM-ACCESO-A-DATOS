@@ -47,7 +47,7 @@ public class Ejercicio2 {
 			cifra=br.readLine();
 			while(cifra!=null ) {
 	
-				System.out.println("Usted anoto "+cifra+" \n ");
+				System.out.println("Usted anoto "+cifra+"\t");
 				cifra=br.readLine();
 				
 				i++;
