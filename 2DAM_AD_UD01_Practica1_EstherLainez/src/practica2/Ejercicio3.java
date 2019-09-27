@@ -33,7 +33,7 @@ public class Ejercicio3 {
 		String fecha=teclado.nextLine();
 		System.out.println("Introduzca la hora: ");
 		String hora=teclado.nextLine();
-		
+		//fecha LocalDateTime.now()
 		
 		String ruta="src/";
 		String nombreF="email.txt";

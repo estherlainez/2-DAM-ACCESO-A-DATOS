@@ -26,13 +26,24 @@ public class Ejercicio1_Texto {
 			f.createNewFile();
 			FileWriter fw=new FileWriter(f);
 			BufferedWriter bw=new BufferedWriter(fw);
-			
+			/*
 			String []datos= {dni,nombre,apellido,fecha,telefono};
 			for(int i=0;i<datos.length;i++) {
 				bw.write(datos[i]);
 				bw.newLine();
 				
 			}
+			*/
+			bw.write(dni);
+			bw.write("|");
+			bw.write(nombre);
+			bw.write("|");
+			bw.write(apellido);
+			bw.write("|");
+			bw.write(fecha);
+			bw.write("|");
+			bw.write(telefono);
+			bw.write("|");
 			
 			bw.close();
 			fw.close();
@@ -44,10 +55,12 @@ public class Ejercicio1_Texto {
 		try {
 			FileReader fr=new FileReader(f);
 			BufferedReader br=new BufferedReader(fr);
-			String datos="";
-			
-			while((datos=br.readLine())!=null){
-				System.out.println("sus datos "+datos);
+			//String datos="";
+			String linea="";
+			String []campos=linea.split("\\|");
+			while((linea=br.readLine())!=null){
+				System.out.println("sus datos "+linea);
+				//system.nombre + campos[0.....
 			}
 			
 			br.close();
