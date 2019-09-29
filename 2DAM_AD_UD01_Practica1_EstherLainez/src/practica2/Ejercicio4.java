@@ -67,11 +67,9 @@ public class Ejercicio4 {
 			break;
 			
 			case 2:
-				
 				String usuario="";
 				
 				try {
-					//File f = new File("src/usuarios.txt");
 					FileReader fr=new FileReader(f);
 					BufferedReader br=new BufferedReader(fr);
 					String  linea="";
@@ -105,7 +103,7 @@ public class Ejercicio4 {
 						System.out.println("Telefono "+campos[4]);
 						
 					}
-					
+					//para imterrumpir el bucle
 					//if(pos==numeroRegistros)break;
 				}catch(IOException e) {
 				
@@ -128,12 +126,12 @@ public class Ejercicio4 {
 					
 						String []campos=linea.split("\\|");
 						if(dniB.equals(campos[0])) {
-						System.out.println(++pos);
-						System.out.println("Dni "+campos[0]);
-						System.out.println("Nombre "+campos[1]);
-						System.out.println("Apellidos "+campos[2]);
-						System.out.println("FechaN "+campos[3]);
-						System.out.println("Telefono "+campos[4]);
+							System.out.println(++pos);
+							System.out.println("Dni "+campos[0]);
+							System.out.println("Nombre "+campos[1]);
+							System.out.println("Apellidos "+campos[2]);
+							System.out.println("FechaN "+campos[3]);
+							System.out.println("Telefono "+campos[4]);
 						}
 						
 					}
@@ -157,8 +155,8 @@ public class Ejercicio4 {
 						String []campos=linea.split("\\|");
 						String palabra=campos[4];
 						char[] caracteres = palabra.toCharArray();
-						System.out.println(caracteres);
-						if(caracteres[0]==6) {
+						
+						if(caracteres[0]=='6') {
 						
 							System.out.println(++pos);
 							System.out.println("Dni "+campos[0]);
@@ -176,7 +174,7 @@ public class Ejercicio4 {
 					
 			
 			}
-		}while(opcion!=4);
+		}while(opcion!=5);
 	
 	}
 	
