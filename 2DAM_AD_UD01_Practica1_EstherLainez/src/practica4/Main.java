@@ -26,8 +26,8 @@ public class Main {
 			switch(opcion) {
 			case 1:
 				System.out.println("¿Que numero de empleado va a consultar?");
-				int numero=teclado.nextInt();
-				consultarEmpleado(numero);
+				String dniBuscar=teclado.nextLine();
+				consultarEmpleado(dniBuscar);
 				break;
 			case 2:
 				nuevoEmpleado(teclado);
@@ -79,10 +79,8 @@ public class Main {
 		//em.listarEmpleados();
 	}
 	
-	public static void consultarEmpleado(Scanner teclado) {
+	public static void consultarEmpleado(String dniBuscar) {
 		EmpleadoController em= new EmpleadoController();
-		System.out.println("Introduzca el dni a buscar:");
-		String dniBuscar=teclado.nextLine();
 		em.buscarEmpleado(dniBuscar);
 	}
 
