@@ -38,6 +38,7 @@ public class Main {
 				break;
 			case 5:
 				listaEmpleados();
+				
 				break;
 			case 6:
 				System.out.println("Adios");
@@ -50,6 +51,8 @@ public class Main {
 	}
 	
 	public static void nuevoEmpleado( Scanner teclado) {
+		System.out.println("ID:");
+		int id=teclado.nextInt();
 		teclado.nextLine();
 		System.out.println("Dni:");
 		String dni=teclado.nextLine();
@@ -73,11 +76,14 @@ public class Main {
 		for(Empleado e:em.listarEmpleados()) {
 			System.out.println(e.toString());
 		}
+		//em.listarEmpleados();
 	}
 	
-	public static void consultarEmpleado(int numero) {
+	public static void consultarEmpleado(Scanner teclado) {
 		EmpleadoController em= new EmpleadoController();
-		em.buscarEmpleado(numero);
+		System.out.println("Introduzca el dni a buscar:");
+		String dniBuscar=teclado.nextLine();
+		em.buscarEmpleado(dniBuscar);
 	}
 
 }

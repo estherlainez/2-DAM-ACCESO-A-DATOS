@@ -60,9 +60,31 @@ public class Empleado implements Serializable{
 	public void setSalario(double salario) {
 		this.salario = salario;
 	}
-
 	
 	
+	public boolean existeDni(String dniComprobar) {
+		int posicion=0;
+		char dni[]=new char[9];
+		try {
+			File f = new File("src/practica4/misEmpleados.dat");
+			RandomAccessFile raf = new RandomAccessFile (f, "r");
+			//bucle para recorrer me falta
+			raf.seek(posicion);
+			for(int i=0;i<9;i++) {
+				dni[i]=raf.readChar();
+			}			
+								
+			if(dni.equals(dniComprobar)) {
+				return true;
+			}
+			
+		}catch (EOFException e) {			
+			System.out.printf("");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}	
 	@Override
 	public String toString() {
 		return "Empleado [Dni=" + dni + ", Nombre=" + nombre + ", Apellido=" + apellido + ", Salario=" + salario + "]";

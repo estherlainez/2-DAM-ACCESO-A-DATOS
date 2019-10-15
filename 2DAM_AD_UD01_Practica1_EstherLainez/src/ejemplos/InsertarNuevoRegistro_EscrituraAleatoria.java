@@ -15,7 +15,7 @@ public class InsertarNuevoRegistro_EscrituraAleatoria {
 		try {
 			RandomAccessFile raf=new RandomAccessFile(new File("src/ejemplos/misEmpleados.dat"),"rw");
 			StringBuffer sb=null;
-			String apellido="Lainez";
+			String apellido="Latorre";
 			Double salario=2000.0;
 			int id=20;
 			int dpto=10;

@@ -19,7 +19,6 @@ public class EmpleadoController {
 			Double salario=e.getSalario();
 			
 			long pos=f.length();
-			
 			f.seek(pos);
 			
 			f.writeInt(id);
@@ -72,11 +71,15 @@ public class EmpleadoController {
 		
 	}
 	
+	
+	
+	
 	public ArrayList<Empleado> listarEmpleados(){
 		ArrayList<Empleado>misEmpleados=new ArrayList();
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"r");
-			int po=0,id;
+			int po=0;
+			int id;
 			char dni[]=new char[9];
 			char[]nombre=new char[10];
 			char[]apellidos=new char[10];
@@ -101,29 +104,28 @@ public class EmpleadoController {
 				//System.out.println("Numero empleado: "+id," Dni: "+String.valueOf(dni)+" Nombre: "+String.valueOf(nombre)+" Apellido: "+String.valueOf(apellidos)+" Salario: "+salario);				
 			}
 			
-			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return misEmpleados;
 		
 	}
 	
-	public void buscarEmpleado(int numero){
+	
+	public void buscarEmpleado(String dniBuscar){
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"r");
-			int po=0,id;
+			int po=0;
+			int id;
 			char dni[]=new char[9];
 			char[]nombre=new char[10];
 			char[]apellidos=new char[10];
 			double salario;
 			
-			po=(numero-1)*70;
-			f.seek(po);
+			
+			//f.seek(po);
 			id=f.readInt();
 			for(int i=0;i<9;i++) {
 				dni[i]=f.readChar();
@@ -142,15 +144,37 @@ public class EmpleadoController {
 			//" Nombre: "+String.valueOf(nombre)+" Apellido: "+String.valueOf(apellidos)+" Salario: "+salario);				
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
 	
+	public boolean borrarEmpleado( String dniBorrar) {
+		try {
+			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
+			
+			StringBuffer sb=null;
+			//String dni=e.getDni();
+			//long pos=f.length();
+			//f.seek(pos);
+			
+			//sb=new StringBuffer(dni);
+			sb.setLength(9);
+			f.write(-1);
+			
+			f.close();
+		}catch(FileNotFoundException d) {
+			d.printStackTrace();
+			return false;
+		}catch(IOException d) {
+			d.printStackTrace();
+			return false;
+		}
+		return true;	
+	
+	}
 
 }
