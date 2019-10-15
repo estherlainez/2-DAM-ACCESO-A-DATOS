@@ -25,9 +25,11 @@ public class Main {
 			
 			switch(opcion) {
 			case 1:
-				System.out.println("¿Que numero de empleado va a consultar?");
-				String dniBuscar=teclado.nextLine();
-				consultarEmpleado(dniBuscar);
+				System.out.println("¿Que dni de empleado va a consultar?");
+				System.out.println("Introduzca dni sin letra");
+				int dniBuscar=teclado.nextInt();
+				//consultarEmpleado(dniBuscar);
+				consultarEmpleadoPos(teclado );
 				break;
 			case 2:
 				nuevoEmpleado(teclado);
@@ -51,11 +53,13 @@ public class Main {
 	}
 	
 	public static void nuevoEmpleado( Scanner teclado) {
-		System.out.println("ID:");
-		int id=teclado.nextInt();
+		
 		teclado.nextLine();
 		System.out.println("Dni:");
 		String dni=teclado.nextLine();
+		System.out.println("ID:");
+		int id=teclado.nextInt();
+		teclado.nextLine();
 		System.out.println("Nombre:");
 		String nombre=teclado.nextLine();
 		System.out.println("Apellidos:");
@@ -63,12 +67,15 @@ public class Main {
 		System.out.println("Salario:");
 		Double salario=teclado.nextDouble();
 		
-		Empleado e=new Empleado(dni,nombre,apellidos,salario);
 		EmpleadoController em= new EmpleadoController();
 		
-		if(!em.insertarEmpleado(e))
-			System.err.println("Error");
-
+		if(em.existeDni(dni)==true) {
+			System.out.println("Este dni ya existe");
+		}else {
+			Empleado e=new Empleado(dni,id,nombre,apellidos,salario);
+			em.insertarEmpleado(e);
+		}
+		
 	}
 	
 	public static void listaEmpleados() {
@@ -76,12 +83,26 @@ public class Main {
 		for(Empleado e:em.listarEmpleados()) {
 			System.out.println(e.toString());
 		}
-		//em.listarEmpleados();
 	}
-	
+	/*
 	public static void consultarEmpleado(String dniBuscar) {
 		EmpleadoController em= new EmpleadoController();
 		em.buscarEmpleado(dniBuscar);
+		
+		if(em.existeDni(dniBuscar)==true) {
+			em.buscarEmpleado(dniBuscar);
+		}else {
+			System.out.println("El dni no existe");
+		}
+	}
+	*/
+	public static void consultarEmpleadoPos(Scanner teclado) {
+		EmpleadoController em= new EmpleadoController();
+		System.out.println("Introduzca dni sin la letra");
+		int dniBuscar=teclado.nextInt();
+		int pos=dniBuscar%10;
+		em.buscarEmpleado(pos);
+		
 	}
 
 }

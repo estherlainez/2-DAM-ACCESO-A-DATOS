@@ -1,5 +1,6 @@
 package practica4;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,19 +22,19 @@ public class EmpleadoController {
 			long pos=f.length();
 			f.seek(pos);
 			
-			f.writeInt(id);
-			
 			sb=new StringBuffer(dni);
 			sb.setLength(9);
-			f.writeUTF(sb.toString());
+			f.writeChars(sb.toString());
+			
+			f.writeInt(id);
 			
 			sb=new StringBuffer(nombre);
 			sb.setLength(10);
-			f.writeUTF(sb.toString());
+			f.writeChars(sb.toString());
 			
 			sb=new StringBuffer(apellido);
 			sb.setLength(10);
-			f.writeUTF(sb.toString());
+			f.writeChars(sb.toString());
 			
 			f.writeDouble(salario);
 			
@@ -43,35 +44,10 @@ public class EmpleadoController {
 		}catch(IOException d) {
 			d.printStackTrace();
 		}	
-			
-			
-			/*
-			for(int i=0;i<e.getDni().length();i++) {
-				f.writeInt(i+1);
-				StringBuffer sd=new StringBuffer(e.getDni());
-				sd.setLength(9);
-				f.writeUTF(sd.toString());
-			}
-			for(int i=0;i<e.getNombre().length();i++) {
-				f.writeInt(i+1);
-				StringBuffer sd=new StringBuffer(e.getNombre());
-				sd.setLength(10);
-				f.writeUTF(sd.toString());
-			}
-			for(int i=0;i<e.getApellido().length();i++) {
-				f.writeInt(i+1);
-				StringBuffer sd=new StringBuffer(e.getApellido());
-				sd.setLength(10);
-				f.writeUTF(sd.toString());
-			}
-
-			f.writeDouble(e.getSalario());
-		*/
+				
 		return true;
 		
 	}
-	
-	
 	
 	
 	public ArrayList<Empleado> listarEmpleados(){
@@ -85,12 +61,17 @@ public class EmpleadoController {
 			char[]apellidos=new char[10];
 			double salario;
 			
+		
 			for(po=0;po<f.length();po+=70) {
+				
 				f.seek(po);
-				id=f.readInt();
+				
 				for(int i=0;i<9;i++) {
 					dni[i]=f.readChar();
 				}
+				
+				id=f.readInt();
+				
 				for(int i=0;i<10;i++) {
 					nombre[i]=f.readChar();
 				}
@@ -113,8 +94,35 @@ public class EmpleadoController {
 		
 	}
 	
+	public boolean existeDni(String dniComprobar) {
+		//int posicion=4;
+		int posicion=0;
+		char dni[]=new char[9];
+		try {
+			File f = new File("src/practica4/misEmpleados.dat");
+			RandomAccessFile raf = new RandomAccessFile (f, "r");
+			do {
+				raf.seek(posicion);
+				for(int i=0;i<9;i++) {
+					dni[i]=raf.readChar();
+				}			
+									
+				if(String.valueOf(dni).equals(dniComprobar)) {
+					return true;
+				}
+				posicion+=70;
+			}while(posicion<f.length());
+			
+		}catch (EOFException e) {			
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}	
 	
-	public void buscarEmpleado(String dniBuscar){
+	
+	public void buscarEmpleado(int p){
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"r");
 			int po=0;
@@ -124,12 +132,14 @@ public class EmpleadoController {
 			char[]apellidos=new char[10];
 			double salario;
 			
+			//po= p*70;
+			//System.out.println(po+"     "+f.length());
+			f.seek((p-1)*70);
 			
-			//f.seek(po);
-			id=f.readInt();
 			for(int i=0;i<9;i++) {
 				dni[i]=f.readChar();
 			}
+			id=f.readInt();
 			for(int i=0;i<10;i++) {
 				nombre[i]=f.readChar();
 			}

@@ -14,8 +14,9 @@ public class Empleado implements Serializable{
 	private String apellido;//10 caracteres=20 bytes
 	private double salario;//8 bytes
 	//total empleado de 70 bytes
-	public Empleado(String d, String n, String a, double s) {
+	public Empleado(String d,int id, String n, String a, double s) {	
 		this.dni=d;
+		this.id=id;
 		this.nombre=n;
 		this.apellido=a;
 		this.salario=s;
@@ -62,29 +63,7 @@ public class Empleado implements Serializable{
 	}
 	
 	
-	public boolean existeDni(String dniComprobar) {
-		int posicion=0;
-		char dni[]=new char[9];
-		try {
-			File f = new File("src/practica4/misEmpleados.dat");
-			RandomAccessFile raf = new RandomAccessFile (f, "r");
-			//bucle para recorrer me falta
-			raf.seek(posicion);
-			for(int i=0;i<9;i++) {
-				dni[i]=raf.readChar();
-			}			
-								
-			if(dni.equals(dniComprobar)) {
-				return true;
-			}
-			
-		}catch (EOFException e) {			
-			System.out.printf("");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}	
+	
 	@Override
 	public String toString() {
 		return "Empleado [Dni=" + dni + ", Nombre=" + nombre + ", Apellido=" + apellido + ", Salario=" + salario + "]";
