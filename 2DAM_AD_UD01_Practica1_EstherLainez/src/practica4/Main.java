@@ -95,9 +95,9 @@ public class Main {
 		em.buscarEmpleado(pos);
 		
 		
-		if(em.existeDni(busqueda)==false) {
-			System.out.println("Este usuario no se encuentra en lista");
-		}
+		//if(em.existeDni(busqueda)==false) {
+			//System.out.println("Este usuario no se encuentra en lista");
+		//}
 		
 	}
 	
