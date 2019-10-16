@@ -11,7 +11,11 @@ public class EmpleadoController {
 	
 	public boolean insertarEmpleado( Empleado e) {
 		try {
-			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
+			File fichero=new File("src/practica4/misEmpleados.dat");
+			fichero.createNewFile();
+			RandomAccessFile f=new RandomAccessFile(fichero,"rw");
+			//RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
+			
 			int id=e.getId();
 			StringBuffer sb=null;
 			String dni=e.getDni();
@@ -132,8 +136,6 @@ public class EmpleadoController {
 			char[]apellidos=new char[10];
 			double salario;
 			
-			//po= p*70;
-			//System.out.println(po+"     "+f.length());
 			f.seek((p-1)*70);
 			
 			for(int i=0;i<9;i++) {
@@ -162,19 +164,52 @@ public class EmpleadoController {
 	}
 	
 	
-	public boolean borrarEmpleado( String dniBorrar) {
+	public boolean borrarEmpleado( int p) {
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
+	
+			f.seek((p-1)*70);
 			
-			StringBuffer sb=null;
-			//String dni=e.getDni();
-			//long pos=f.length();
-			//f.seek(pos);
+			f.writeInt(-1);	
+
+			f.close();
+		}catch(FileNotFoundException d) {
+			d.printStackTrace();
+			return false;
+		}catch(IOException d) {
+			d.printStackTrace();
+			return false;
+		}
+		return true;	
+	
+	}
+	
+	public boolean modificarEmpleado( int p,double salarioNuevo) {
+		try {
+			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");			
+			int id;
+			char dni[]=new char[9];
+			char[]nombre=new char[10];
+			char[]apellidos=new char[10];
+			double salarioViejo;
 			
-			//sb=new StringBuffer(dni);
-			sb.setLength(9);
-			f.write(-1);
+			f.seek((p-1)*70);
 			
+			for(int i=0;i<9;i++) {
+				dni[i]=f.readChar();
+			}
+			id=f.readInt();
+			for(int i=0;i<10;i++) {
+				nombre[i]=f.readChar();
+			}
+			for(int i=0;i<10;i++) {
+				apellidos[i]=f.readChar();
+			}	
+		
+			salarioViejo=f.readDouble();		
+			f.writeDouble(salarioNuevo);	
+			
+			System.out.println("Id: "+id+" Dni: "+new String(dni)+" Nombre: "+new String(nombre)+" Apellido: "+new String(apellidos)+" Salario anterior: "+salarioViejo+" Salario actual: "+salarioNuevo);
 			f.close();
 		}catch(FileNotFoundException d) {
 			d.printStackTrace();
