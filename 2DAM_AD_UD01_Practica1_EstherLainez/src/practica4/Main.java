@@ -34,7 +34,7 @@ public class Main {
 				modificarEmpleadoPos();
 				break;
 			case 4:
-				borrarEmpleadoPos();
+				//borrarEmpleadoPos();
 				break;
 			case 5:
 				listaEmpleados();
