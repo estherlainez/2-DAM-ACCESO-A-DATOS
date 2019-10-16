@@ -100,7 +100,7 @@ public class Main {
 		//}
 		
 	}
-	
+	/*
 	public static void borrarEmpleadoPos() {
 		Scanner teclado=new Scanner(System.in);
 		EmpleadoController em= new EmpleadoController();
@@ -115,7 +115,7 @@ public class Main {
 			System.out.println("Algo ha fallado");
 		}
 		
-	}
+	}*/
 	
 	public static void modificarEmpleadoPos() {
 		Scanner teclado=new Scanner(System.in);

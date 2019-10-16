@@ -11,10 +11,10 @@ public class EmpleadoController {
 	
 	public boolean insertarEmpleado( Empleado e) {
 		try {
-			File fichero=new File("src/practica4/misEmpleados.dat");
-			fichero.createNewFile();
-			RandomAccessFile f=new RandomAccessFile(fichero,"rw");
-			//RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
+			//File fichero=new File("src/practica4/misEmpleados.dat");
+			//fichero.createNewFile();
+			//RandomAccessFile f=new RandomAccessFile(fichero,"rw");
+			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
 			
 			int id=e.getId();
 			StringBuffer sb=null;
@@ -86,7 +86,7 @@ public class EmpleadoController {
 				
 				System.out.printf("ID: %s, Dni: %s,Nombre: %s,  Apellido: %s, Salario:%.2f %n",
 						id,String.valueOf(dni),String.valueOf(nombre),String.valueOf(apellidos), salario);
-				//System.out.println("Numero empleado: "+id," Dni: "+String.valueOf(dni)+" Nombre: "+String.valueOf(nombre)+" Apellido: "+String.valueOf(apellidos)+" Salario: "+salario);				
+				
 			}
 			
 		} catch (FileNotFoundException e) {
@@ -163,7 +163,7 @@ public class EmpleadoController {
 		
 	}
 	
-	
+	/*
 	public boolean borrarEmpleado( int p) {
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
@@ -183,7 +183,7 @@ public class EmpleadoController {
 		return true;	
 	
 	}
-	
+	*/
 	public boolean modificarEmpleado( int p,double salarioNuevo) {
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");			
