@@ -8,45 +8,84 @@ import java.io.RandomAccessFile;
 import java.util.ArrayList;
 
 public class EmpleadoController {
-	
+	//tamañoRegistro
+	//randomaccesFile
+	//rutaFichero
 	public boolean insertarEmpleado( Empleado e) {
+		int id=e.getId();
+		StringBuffer sb=null;
+		String dni=e.getDni();
+		String nombre=e.getNombre();
+		String apellido=e.getApellido();
+		Double salario=e.getSalario();
+		RandomAccessFile f=null;
+		int posi=0;
 		try {
-			//File fichero=new File("src/practica4/misEmpleados.dat");
-			//fichero.createNewFile();
-			//RandomAccessFile f=new RandomAccessFile(fichero,"rw");
-			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
 			
-			int id=e.getId();
-			StringBuffer sb=null;
-			String dni=e.getDni();
-			String nombre=e.getNombre();
-			String apellido=e.getApellido();
-			Double salario=e.getSalario();
+			f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
 			
-			long pos=f.length();
-			f.seek(pos);
-			
-			sb=new StringBuffer(dni);
-			sb.setLength(9);
-			f.writeChars(sb.toString());
-			
-			f.writeInt(id);
-			
-			sb=new StringBuffer(nombre);
-			sb.setLength(10);
-			f.writeChars(sb.toString());
-			
-			sb=new StringBuffer(apellido);
-			sb.setLength(10);
-			f.writeChars(sb.toString());
-			
-			f.writeDouble(salario);
-			
-			f.close();
+			posi= Integer.valueOf((e.getDni().substring(0, e.getDni().length()-2)))%10;
+			/*
+			 * Antes de insertar debemos comprobar si ya existe un emp en esa posición
+			 */
+			//comprobar si existe
+			f.seek(posi*70);
+			char a= f.readChar();
+			if(a!=' ') {
+				//El elmpleado ya existe
+				f.close();
+				return false;
+			}else {
+				//El elmpleado no existe
+				//Escribo los registros
+				f.seek(posi*70);
+				sb=new StringBuffer(dni);
+				sb.setLength(9);
+				f.writeChars(sb.toString());
+				
+				f.writeInt(id);
+				
+				sb=new StringBuffer(nombre);
+				sb.setLength(10);
+				f.writeChars(sb.toString());
+				
+				sb=new StringBuffer(apellido);
+				sb.setLength(10);
+				f.writeChars(sb.toString());
+				
+				f.writeDouble(salario);
+				f.close();
+				return true;
+			}
+					
 		}catch(FileNotFoundException d) {
 			d.printStackTrace();
 		}catch(IOException d) {
-			d.printStackTrace();
+			//d.printStackTrace();
+			//Puede ser que estemos al final del fichero y podamos insertar ahi.
+			try {
+				f.seek(posi*70);
+				sb=new StringBuffer(dni);
+				sb.setLength(9);
+				f.writeChars(sb.toString());
+				
+				f.writeInt(id);
+				
+				sb=new StringBuffer(nombre);
+				sb.setLength(10);
+				f.writeChars(sb.toString());
+				
+				sb=new StringBuffer(apellido);
+				sb.setLength(10);
+				f.writeChars(sb.toString());
+				
+				f.writeDouble(salario);
+				f.close();
+				return true;
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}	
 				
 		return true;
@@ -83,7 +122,7 @@ public class EmpleadoController {
 					apellidos[i]=f.readChar();
 				}
 				salario=f.readDouble();
-				
+				//AÑADIR AL ARRAY ADD(EMPLEADO)
 				System.out.printf("ID: %s, Dni: %s,Nombre: %s,  Apellido: %s, Salario:%.2f %n",
 						id,String.valueOf(dni),String.valueOf(nombre),String.valueOf(apellidos), salario);
 				
@@ -98,46 +137,30 @@ public class EmpleadoController {
 		
 	}
 	
-	public boolean existeDni(String dniComprobar) {
-		//int posicion=4;
-		int posicion=0;
-		char dni[]=new char[9];
-		try {
-			File f = new File("src/practica4/misEmpleados.dat");
-			RandomAccessFile raf = new RandomAccessFile (f, "r");
-			do {
-				raf.seek(posicion);
-				for(int i=0;i<9;i++) {
-					dni[i]=raf.readChar();
-				}			
-									
-				if(String.valueOf(dni).equals(dniComprobar)) {
-					return true;
-				}
-				posicion+=70;
-			}while(posicion<f.length());
-			
-		}catch (EOFException e) {			
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}	
 	
 	
-	public void buscarEmpleado(int p){
+	public void buscarEmpleado(String dniBuscar){
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"r");
-			int po=0;
+			int posi=0;
 			int id;
 			char dni[]=new char[9];
 			char[]nombre=new char[10];
 			char[]apellidos=new char[10];
 			double salario;
 			
-			f.seek((p-1)*70);
+			posi= Integer.valueOf((dniBuscar.substring(0, dniBuscar.length()-2)))%10;
+			f.seek((posi)*70);
+			//comprobar si la posicion esta ocupada
+			/*
+			char a= f.readChar();
+			if(a!=' ') {
+				//El elmpleado ya existe
+				f.close();
+				return false;
+			}else {
 			
+			}*/
 			for(int i=0;i<9;i++) {
 				dni[i]=f.readChar();
 			}
@@ -164,36 +187,62 @@ public class EmpleadoController {
 	}
 	
 	/*
-	public boolean borrarEmpleado( int p) {
+	public boolean borrarEmpleado( String dniBorrar) {
+		RandomAccessFile f=null;
+		int posi=0;
+		String dni = null;
+		int id = 0;
+		String nombre = null;
+		String apellidos = null;
+		double salario = 0;
 		try {
-			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
-	
-			f.seek((p-1)*70);
 			
-			f.writeInt(-1);	
+			f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");
 
-			f.close();
+			posi= Integer.valueOf((dniBorrar.substring(0, dniBorrar.length()-2)))%10;
+			
+			f.seek(posi*70);
+			char a= f.readChar();
+			if(a==' ') {
+				
+				return false;
+			}else {
+				StringBuffer sb=new StringBuffer();
+				f.seek(posi*70);
+				sb=new StringBuffer(dni);
+				sb.setLength(9);
+				f.writeChars(" ");
+				
+				
+				f.close();
+				return true;
+			}
+					
 		}catch(FileNotFoundException d) {
 			d.printStackTrace();
-			return false;
 		}catch(IOException d) {
-			d.printStackTrace();
-			return false;
-		}
-		return true;	
+			//d.printStackTrace();
+			
+		}	
+				
+		return true;
+		
+	}*/
 	
-	}
-	*/
-	public boolean modificarEmpleado( int p,double salarioNuevo) {
+	public boolean modificarEmpleado( String dniModificar,double salarioNuevo) {
+		//igual que insertar pero comprobando que la posicion este libre, al reves
+		
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"rw");			
-			int id;
+			int id,posi;
 			char dni[]=new char[9];
 			char[]nombre=new char[10];
 			char[]apellidos=new char[10];
 			double salarioViejo;
 			
-			f.seek((p-1)*70);
+			posi= Integer.valueOf((dniModificar.substring(0, dniModificar.length()-2)))%10;
+			f.seek(posi*70);
+			
 			
 			for(int i=0;i<9;i++) {
 				dni[i]=f.readChar();

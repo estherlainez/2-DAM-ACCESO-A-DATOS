@@ -34,7 +34,7 @@ public class Main {
 				modificarEmpleadoPos();
 				break;
 			case 4:
-				//borrarEmpleadoPos();
+				borrarEmpleadoPorDni();
 				break;
 			case 5:
 				listaEmpleados();
@@ -66,12 +66,14 @@ public class Main {
 		
 		EmpleadoController em= new EmpleadoController();
 		
-		if(em.existeDni(dni)==true) {
-			System.out.println("Este dni ya existe");
-		}else {
+		
 			Empleado e=new Empleado(dni,id,nombre,apellidos,salario);
-			em.insertarEmpleado(e);
-		}
+			if(em.insertarEmpleado(e)) {
+				System.out.println("Empleado insertado");
+			}else {
+				System.out.println("El empleado ya existia");
+			}
+		
 		
 	}
 	
@@ -85,48 +87,36 @@ public class Main {
 	public static void consultarEmpleadoPos() {
 		Scanner teclado=new Scanner(System.in);
 		EmpleadoController em= new EmpleadoController();
-		System.out.println("Introduzca dni sin la letra");
-		int dniBuscar=teclado.nextInt();
-		int pos=dniBuscar%10;
-		
-		String busqueda="";
-		busqueda.valueOf(dniBuscar);
-		
-		em.buscarEmpleado(pos);
-		
-		
-		//if(em.existeDni(busqueda)==false) {
-			//System.out.println("Este usuario no se encuentra en lista");
-		//}
+		System.out.println("Introduzca dni");
+		String dniBuscar=teclado.nextLine();
+		em.buscarEmpleado(dniBuscar);
 		
 	}
-	/*
-	public static void borrarEmpleadoPos() {
+	
+	public static void borrarEmpleadoPorDni() {
 		Scanner teclado=new Scanner(System.in);
 		EmpleadoController em= new EmpleadoController();
-		System.out.println("Introduzca dni sin la letra");
-		int dniBuscar=teclado.nextInt();
-		int pos=dniBuscar%10;
-		em.borrarEmpleado(pos);
+		System.out.println("Introduzca dni");
+		String dniBorrar=teclado.nextLine();
+		em.borrarEmpleado(dniBorrar);
 		
-		if(em.borrarEmpleado(pos)==true) {
+		if(em.borrarEmpleado(dniBorrar)==true) {
 			System.out.println("El empleado se borro");
 		}else {
 			System.out.println("Algo ha fallado");
 		}
 		
-	}*/
+	}
 	
 	public static void modificarEmpleadoPos() {
 		Scanner teclado=new Scanner(System.in);
 		EmpleadoController em= new EmpleadoController();
-		System.out.println("Introduzca dni sin la letra");
-		int dniBuscar=teclado.nextInt();
-		int pos=dniBuscar%10;
+		System.out.println("Introduzca dni");
+		String dniModificar=teclado.nextLine();
 		
 		System.out.println("Introduzca el nuevo salario");
 		double salario=teclado.nextDouble();
-		em.modificarEmpleado(pos,salario);
+		em.modificarEmpleado(dniModificar,salario);
 		
 	}
 
