@@ -1,4 +1,4 @@
-package ejemplos;
+package ejemplos_FicheroAleatorio;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package ejemplos;
+package ejemplosTexto_y_Binarios;
 
 import java.io.*;
 

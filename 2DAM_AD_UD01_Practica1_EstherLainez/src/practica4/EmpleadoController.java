@@ -139,7 +139,7 @@ public class EmpleadoController {
 	
 	
 	
-	public void buscarEmpleado(String dniBuscar){
+	public boolean buscarEmpleado(String dniBuscar){
 		try {
 			RandomAccessFile f=new RandomAccessFile(new File("src/practica4/misEmpleados.dat"),"r");
 			int posi=0;
@@ -152,41 +152,44 @@ public class EmpleadoController {
 			posi= Integer.valueOf((dniBuscar.substring(0, dniBuscar.length()-2)))%10;
 			f.seek((posi)*70);
 			//comprobar si la posicion esta ocupada
-			/*
+			
 			char a= f.readChar();
-			if(a!=' ') {
-				//El elmpleado ya existe
+			if(a==' ') {
+				
 				f.close();
 				return false;
 			}else {
 			
-			}*/
-			for(int i=0;i<9;i++) {
-				dni[i]=f.readChar();
-			}
-			id=f.readInt();
-			for(int i=0;i<10;i++) {
-				nombre[i]=f.readChar();
-			}
-			for(int i=0;i<10;i++) {
-				apellidos[i]=f.readChar();
-			}	
-			salario=f.readDouble();
-				
-			System.out.printf("ID: %s, Dni: %s,Nombre: %s,  Apellido: %s, Salario:%.2f %n",
-					id,String.valueOf(dni),String.valueOf(nombre),String.valueOf(apellidos), salario);
-			//System.out.println("Numero empleado: "+id," Dni: "+String.valueOf(dni)+
-			//" Nombre: "+String.valueOf(nombre)+" Apellido: "+String.valueOf(apellidos)+" Salario: "+salario);				
 			
+				for(int i=0;i<9;i++) {
+					dni[i]=f.readChar();
+				}
+				id=f.readInt();
+				for(int i=0;i<10;i++) {
+					nombre[i]=f.readChar();
+				}
+				for(int i=0;i<10;i++) {
+					apellidos[i]=f.readChar();
+				}	
+				salario=f.readDouble();
+					
+				System.out.printf("ID: %s, Dni: %s,Nombre: %s,  Apellido: %s, Salario:%.2f %n",
+						id,String.valueOf(dni),String.valueOf(nombre),String.valueOf(apellidos), salario);
+				
+				f.close();
+				return true;
+				
+			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return true;
 		
 	}
 	
-	/*
+	
 	public boolean borrarEmpleado( String dniBorrar) {
 		RandomAccessFile f=null;
 		int posi=0;
@@ -227,7 +230,7 @@ public class EmpleadoController {
 				
 		return true;
 		
-	}*/
+	}
 	
 	public boolean modificarEmpleado( String dniModificar,double salarioNuevo) {
 		//igual que insertar pero comprobando que la posicion este libre, al reves

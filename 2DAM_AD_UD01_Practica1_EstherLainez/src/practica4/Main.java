@@ -67,12 +67,12 @@ public class Main {
 		EmpleadoController em= new EmpleadoController();
 		
 		
-			Empleado e=new Empleado(dni,id,nombre,apellidos,salario);
-			if(em.insertarEmpleado(e)) {
-				System.out.println("Empleado insertado");
-			}else {
-				System.out.println("El empleado ya existia");
-			}
+		Empleado e=new Empleado(dni,id,nombre,apellidos,salario);
+		if(em.insertarEmpleado(e)) {
+			System.out.println("Empleado insertado");
+		}else {
+			System.out.println("El empleado ya existia");
+		}
 		
 		
 	}
@@ -98,9 +98,9 @@ public class Main {
 		EmpleadoController em= new EmpleadoController();
 		System.out.println("Introduzca dni");
 		String dniBorrar=teclado.nextLine();
-		em.borrarEmpleado(dniBorrar);
 		
-		if(em.borrarEmpleado(dniBorrar)==true) {
+		
+		if(em.buscarEmpleado(dniBorrar)==true) {
 			System.out.println("El empleado se borro");
 		}else {
 			System.out.println("Algo ha fallado");
